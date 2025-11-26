@@ -1,0 +1,45 @@
+REJUVENATE HEALTH MKE - FILE INDEX
+==================================
+
+📖 START HERE FIRST:
+-------------------
+START-HERE.md ............ Overview and next steps (read this first!)
+QUICK-START.md ........... 10-minute deployment guide
+
+📚 DOCUMENTATION:
+----------------
+README.md ................ Complete technical guide and deployment options
+SITE-OVERVIEW.md ......... Design features, pages, and SEO details
+LOGO-AND-BRAND.md ........ Logo options and brand guidelines
+FILE-INDEX.txt ........... This file - explains what everything is
+
+🌐 WEBSITE FILES (Upload these to go live):
+-------------------------------------------
+index.html ............... Homepage
+emsculpt.html ............ Emsculpt NEO detail page
+emsella.html ............. Emsella detail page
+styles.css ............... All styling and design
+script.js ................ Interactivity, forms, mobile menu
+
+🚀 TO DEPLOY:
+------------
+Option 1 (Simple): Upload all 5 website files to TigerTech
+Option 2 (Pro): Use Netlify + GitHub (see QUICK-START.md)
+
+✏️ BEFORE LAUNCH:
+----------------
+1. Find/replace "(414) XXX-XXXX" with your real phone number
+2. Test locally by opening index.html in browser
+3. Check on mobile phone
+
+📞 NEED HELP?
+------------
+Just ask! I can:
+- Modify any content
+- Change colors/design
+- Add new sections
+- Help with deployment
+- Answer any questions
+
+Built with ❤️ using Claude Code
+Ready to launch and start generating leads!

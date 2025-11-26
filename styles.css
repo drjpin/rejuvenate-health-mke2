@@ -258,7 +258,8 @@ p {
     min-height: 85vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-accent) 100%);
+    background: linear-gradient(rgba(28, 47, 56, 0.75), rgba(28, 47, 56, 0.75)), 
+                url('images/hero-emsculpt.jpg') center/cover no-repeat;
     overflow: hidden;
 }
 
@@ -284,9 +285,14 @@ p {
     margin-bottom: var(--spacing-md);
 }
 
+.hero h1 {
+    margin-bottom: var(--spacing-md);
+    color: white;
+}
+
 .hero-subtitle {
     font-size: 1.25rem;
-    color: var(--text-medium);
+    color: rgba(255, 255, 255, 0.95);
     margin-bottom: var(--spacing-lg);
     line-height: 1.7;
 }

@@ -414,6 +414,15 @@ p {
     height: auto;
 }
 
+.service-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    object-fit: cover;
+    max-height: 500px;
+}
+
 /* ===========================
    Why Choose Section
    =========================== */

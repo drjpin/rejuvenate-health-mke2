@@ -342,9 +342,9 @@ p {
 
 .service-header {
     text-align: center;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto var(--spacing-lg);
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--spacing-sm);
 }
 
 .service-header h2 {
@@ -368,7 +368,7 @@ p {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-xl);
-    align-items: center;
+    align-items: start;
 }
 
 .service-grid.reverse {

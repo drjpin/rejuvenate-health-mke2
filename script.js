@@ -219,6 +219,8 @@ const beforeAfterSlider = document.querySelector('.slider-handle');
 if (beforeAfterSlider) {
     const container = document.querySelector('.before-after-images');
     const afterImage = document.querySelector('.after-image');
+    const beforeLabel = document.querySelector('.before-label-overlay');
+    const afterLabel = document.querySelector('.after-label-overlay');
     let isDragging = false;
 
     function updateSlider(x) {
@@ -228,6 +230,15 @@ if (beforeAfterSlider) {
         
         beforeAfterSlider.style.left = percentage + '%';
         afterImage.style.clipPath = `inset(0 0 0 ${percentage}%)`;
+        
+        // Show/hide labels based on slider position
+        if (beforeLabel && afterLabel) {
+            // Hide BEFORE label when slider moves past it (>15%)
+            beforeLabel.style.opacity = percentage > 15 ? '0' : '1';
+            
+            // Hide AFTER label when slider hasn't reached it yet (<85%)
+            afterLabel.style.opacity = percentage < 85 ? '0' : '1';
+        }
     }
 
     beforeAfterSlider.addEventListener('mousedown', () => {

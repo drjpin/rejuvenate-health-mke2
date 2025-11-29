@@ -987,6 +987,7 @@ p {
     letter-spacing: 1px;
     border-radius: 0 6px 6px 0;
     z-index: 5;
+    transition: opacity 0.3s ease;
 }
 
 .after-label-overlay {
@@ -1002,6 +1003,7 @@ p {
     letter-spacing: 1px;
     border-radius: 6px 0 0 6px;
     z-index: 5;
+    transition: opacity 0.3s ease;
 }
 
 .after-image {

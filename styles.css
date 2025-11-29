@@ -957,6 +957,53 @@ p {
     height: auto;
 }
 
+/* Overlay labels on images */
+.before-image::before,
+.after-image::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    padding: 0.5rem 1rem;
+    background: rgba(44, 95, 111, 0.9);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 0 6px 6px 0;
+    z-index: 5;
+}
+
+.before-label-overlay {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    padding: 0.5rem 1rem;
+    background: rgba(44, 95, 111, 0.9);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 0 6px 6px 0;
+    z-index: 5;
+}
+
+.after-label-overlay {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    padding: 0.5rem 1rem;
+    background: rgba(122, 184, 168, 0.9);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 6px 0 0 6px;
+    z-index: 5;
+}
+
 .after-image {
     position: absolute;
     top: 0;
@@ -1019,12 +1066,20 @@ p {
 
 .label-before,
 .label-after {
-    padding: 0.5rem 1rem;
-    background: var(--light-bg);
-    border-radius: 6px;
-    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(44, 95, 111, 0.3);
+}
+
+.label-after {
+    background: var(--accent-color);
+    box-shadow: 0 2px 8px rgba(122, 184, 168, 0.3);
 }
 
 .results-details {

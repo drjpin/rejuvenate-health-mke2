@@ -33,7 +33,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form Submission Handler
+// Form Submission Handler (Formspree)
 const consultationForm = document.getElementById('consultationForm');
 
 if (consultationForm) {
@@ -42,7 +42,6 @@ if (consultationForm) {
         
         // Get form data
         const formData = new FormData(consultationForm);
-        const data = Object.fromEntries(formData);
         
         // Show loading state
         const submitButton = consultationForm.querySelector('button[type="submit"]');
@@ -50,19 +49,27 @@ if (consultationForm) {
         submitButton.textContent = 'Sending...';
         submitButton.disabled = true;
         
-        // In production, you would send this to your backend
-        // For now, we'll simulate a successful submission
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Submit to Formspree
+            const response = await fetch(consultationForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
             
-            // Show success message
-            showNotification('Thank you! We\'ll contact you within 24 hours to schedule your consultation.', 'success');
-            
-            // Reset form
-            consultationForm.reset();
+            if (response.ok) {
+                // Show success message
+                showNotification('Thank you! We\'ll contact you within 24 hours to schedule your consultation.', 'success');
+                
+                // Reset form
+                consultationForm.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
         } catch (error) {
-            showNotification('Oops! Something went wrong. Please call us directly at (414) XXX-XXXX.', 'error');
+            showNotification('Oops! Something went wrong. Please call us directly at (414) 295-6045.', 'error');
         } finally {
             submitButton.textContent = originalText;
             submitButton.disabled = false;

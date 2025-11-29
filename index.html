@@ -180,7 +180,7 @@
         <div class="container">
             <div class="form-container">
                 <h2>Request Your Free Consultation</h2>
-                <form class="contact-form" id="consultationForm">
+                <form class="contact-form" id="consultationForm" action="https://formspree.io/f/mqavoyny" method="POST">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">First Name *</label>
@@ -219,6 +219,9 @@
                         <label for="message">Tell us about your goals (optional)</label>
                         <textarea id="message" name="message" rows="4"></textarea>
                     </div>
+                    
+                    <!-- Honeypot spam protection (hidden field) -->
+                    <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
                     
                     <button type="submit" class="button primary large">Submit Request</button>
                     <p class="form-note">We'll contact you within 24 hours to schedule your consultation.</p>

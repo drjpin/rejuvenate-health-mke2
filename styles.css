@@ -926,3 +926,126 @@ p {
         padding: 0 var(--spacing-sm);
     }
 }
+
+/* Before/After Comparison Slider */
+.before-after-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+    margin-top: var(--spacing-lg);
+}
+
+.before-after-wrapper {
+    position: relative;
+}
+
+.before-after-images {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.before-image,
+.after-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.after-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: inset(0 0 0 50%);
+}
+
+.slider-handle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: white;
+    transform: translateX(-50%);
+    cursor: ew-resize;
+    z-index: 10;
+}
+
+.slider-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: white;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    background: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: ew-resize;
+}
+
+.slider-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+.before-after-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.label-before,
+.label-after {
+    padding: 0.5rem 1rem;
+    background: var(--light-bg);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.results-details {
+    background: var(--light-bg);
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+}
+
+.results-details h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.results-details .feature-list {
+    margin-bottom: 0;
+}
+
+@media (max-width: 968px) {
+    .before-after-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+}
+

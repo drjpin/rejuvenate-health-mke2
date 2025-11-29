@@ -213,3 +213,50 @@ document.querySelectorAll('a[href^="tel:"]').forEach(link => {
         // In production, you would send this to your analytics
     });
 });
+
+// Before/After Slider
+const beforeAfterSlider = document.querySelector('.slider-handle');
+if (beforeAfterSlider) {
+    const container = document.querySelector('.before-after-images');
+    const afterImage = document.querySelector('.after-image');
+    let isDragging = false;
+
+    function updateSlider(x) {
+        const rect = container.getBoundingClientRect();
+        const offsetX = x - rect.left;
+        const percentage = Math.max(0, Math.min(100, (offsetX / rect.width) * 100));
+        
+        beforeAfterSlider.style.left = percentage + '%';
+        afterImage.style.clipPath = `inset(0 0 0 ${percentage}%)`;
+    }
+
+    beforeAfterSlider.addEventListener('mousedown', () => {
+        isDragging = true;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            updateSlider(e.clientX);
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+
+    // Touch support for mobile
+    beforeAfterSlider.addEventListener('touchstart', () => {
+        isDragging = true;
+    });
+
+    document.addEventListener('touchmove', (e) => {
+        if (isDragging && e.touches[0]) {
+            updateSlider(e.touches[0].clientX);
+        }
+    });
+
+    document.addEventListener('touchend', () => {
+        isDragging = false;
+    });
+}
+

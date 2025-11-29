@@ -1010,7 +1010,7 @@ p {
     position: absolute;
     top: 0;
     left: 0;
-    clip-path: inset(0 0 0 50%);
+    clip-path: inset(0 50% 0 0);
 }
 
 .slider-handle {
@@ -1056,32 +1056,6 @@ p {
 .slider-button svg {
     width: 24px;
     height: 24px;
-}
-
-.before-after-labels {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-.label-before,
-.label-after {
-    padding: 0.75rem 1.5rem;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 8px;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(44, 95, 111, 0.3);
-}
-
-.label-after {
-    background: var(--accent-color);
-    box-shadow: 0 2px 8px rgba(122, 184, 168, 0.3);
 }
 
 .results-details {

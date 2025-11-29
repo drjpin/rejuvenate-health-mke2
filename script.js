@@ -229,15 +229,18 @@ if (beforeAfterSlider) {
         const percentage = Math.max(0, Math.min(100, (offsetX / rect.width) * 100));
         
         beforeAfterSlider.style.left = percentage + '%';
-        afterImage.style.clipPath = `inset(0 0 0 ${percentage}%)`;
+        // After image reveals from left to right as slider moves right
+        afterImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
         
-        // Show/hide labels based on slider position
+        // Smooth gradual fade for labels
         if (beforeLabel && afterLabel) {
-            // Hide BEFORE label when slider moves past it (>15%)
-            beforeLabel.style.opacity = percentage > 15 ? '0' : '1';
+            // BEFORE label: fully visible at 0%, fades out gradually, invisible at 90%
+            const beforeOpacity = Math.max(0, Math.min(1, (90 - percentage) / 90));
+            beforeLabel.style.opacity = beforeOpacity;
             
-            // Hide AFTER label when slider hasn't reached it yet (<85%)
-            afterLabel.style.opacity = percentage < 85 ? '0' : '1';
+            // AFTER label: invisible at 0%, fades in gradually starting at 10%, fully visible at 90%
+            const afterOpacity = Math.max(0, Math.min(1, (percentage - 10) / 80));
+            afterLabel.style.opacity = afterOpacity;
         }
     }
 

@@ -8,7 +8,33 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3KH8MD7GB0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3KH8MD7GB0');
+    </script>
+    
+    <!-- Schema.org markup for Emsculpt service -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalProcedure",
+      "name": "Emsculpt NEO",
+      "alternateName": "Body Sculpting",
+      "description": "Non-invasive body contouring treatment that builds muscle and burns fat using HIFEM and RF technology",
+      "procedureType": "Non-invasive cosmetic procedure",
+      "bodyLocation": "Abdomen, Buttocks, Arms, Thighs, Calves",
+      "preparation": "No preparation required",
+      "followup": "No downtime required",
+      "howPerformed": "30-minute sessions using electromagnetic muscle stimulation and radiofrequency",
+      "status": "FDA cleared"
+    }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -17,14 +43,9 @@
             <div class="nav-content">
                 <div class="logo-container">
                     <a href="index.html">
-                        <svg class="logo" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-                            <g id="logo-mark">
-                                <circle cx="30" cy="30" r="20" fill="none" stroke="#2C5F6F" stroke-width="2"/>
-                                <path d="M 20 30 Q 30 20, 40 30 T 40 30" fill="none" stroke="#7AB8A8" stroke-width="2.5" stroke-linecap="round"/>
-                                <circle cx="30" cy="30" r="4" fill="#7AB8A8"/>
-                            </g>
-                            <text x="60" y="38" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#2C5F6F">REJUVENATE</text>
-                            <text x="60" y="52" font-family="Inter, sans-serif" font-size="11" font-weight="400" fill="#7AB8A8" letter-spacing="2">HEALTH MKE</text>
+                        <svg class="logo" viewBox="0 0 240 60" xmlns="http://www.w3.org/2000/svg">
+                            <text x="230" y="38" text-anchor="end" font-family="Cinzel, serif" font-size="28" font-weight="600" fill="#2C5F6F" letter-spacing="1.5">REJUVENATE</text>
+                            <text x="230" y="54" text-anchor="end" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#7AB8A8" letter-spacing="2.5">HEALTH MKE</text>
                         </svg>
                     </a>
                 </div>
@@ -58,7 +79,7 @@
             <div class="content-grid">
                 <div class="content-main">
                     <h2>Two Revolutionary Treatments in One</h2>
-                    <p>Emsculpt NEO combines radiofrequency heating with high-intensity electromagnetic energy to deliver something no other device can: simultaneous fat reduction and muscle building. Whether you're looking to sculpt your ideal body or recover from an injury, Emsculpt NEO provides clinically proven results.</p>
+                    <p>Emsculpt NEO combines radiofrequency heating with high-intensity electromagnetic energy to deliver something no other device can: simultaneous fat reduction and muscle building. As the only Emsculpt NEO provider in Bay View, we offer both body transformation and injury rehabilitation with this FDA-cleared technology.</p>
                     
                     <div class="stats-grid">
                         <div class="stat-card">
@@ -174,6 +195,45 @@
         </div>
     </section>
 
+    <!-- Real Results -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">Real Results</h2>
+            <p class="section-intro">See the difference Emsculpt NEO can make. These are actual patient results from our practice.</p>
+            
+            <div class="before-after-container">
+                <div class="before-after-wrapper">
+                    <div class="before-after-images">
+                        <span class="before-label-overlay">BEFORE</span>
+                        <span class="after-label-overlay">AFTER</span>
+                        <img src="images/emsculpt-before.jpg" alt="Before Emsculpt NEO treatment" class="before-image">
+                        <img src="images/emsculpt-after.jpg" alt="After Emsculpt NEO treatment" class="after-image">
+                        <div class="slider-handle">
+                            <div class="slider-line"></div>
+                            <div class="slider-button">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 19l7-7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="results-details">
+                    <h3>Treatment Protocol</h3>
+                    <ul class="feature-list">
+                        <li><strong>Area Treated:</strong> Abdomen</li>
+                        <li><strong>Number of Sessions:</strong> 4 treatments</li>
+                        <li><strong>Treatment Schedule:</strong> 2 sessions per week for 2 weeks</li>
+                        <li><strong>Results Timeline:</strong> Photos taken 3 months post-treatment</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><em>Individual results may vary. Not all patients will experience the same results.</em></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ -->
     <section class="content-section">
         <div class="container">
@@ -246,7 +306,10 @@
                     <h4>Contact</h4>
                     <p>Phone: (414) 295-6045<br>
                     Email: info@rejuvenatehealthmke.com<br>
-                    Bay View, Milwaukee, WI</p>
+                    <br>
+                    Located inside <a href="https://bayviewmkechiro.com" target="_blank" rel="noopener" style="color: #7AB8A8; text-decoration: underline;">Bay View Chiropractic</a><br>
+                    3116 S Kinnickinnick Ave<br>
+                    Milwaukee, WI 53207</p>
                 </div>
             </div>
             <div class="footer-bottom">

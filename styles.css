@@ -222,14 +222,15 @@ p {
 }
 
 .button.secondary {
-    background: transparent;
+    background: white;
     color: var(--primary-color);
-    border-color: var(--primary-color);
+    border-color: white;
 }
 
 .button.secondary:hover {
     background: var(--primary-color);
     color: white;
+    border-color: var(--primary-color);
 }
 
 .button.large {
@@ -238,15 +239,18 @@ p {
 }
 
 .cta-button {
-    background: var(--accent-color);
-    color: white;
+    background: white;
+    color: var(--primary-color);
     padding: 0.75rem 1.5rem;
     border-radius: var(--radius-md);
     transition: all 0.3s ease;
+    border: 2px solid white;
 }
 
 .cta-button:hover {
-    background: var(--primary-color);
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
 }
 
 /* ===========================
@@ -340,11 +344,35 @@ p {
     background: var(--bg-light);
 }
 
+.service-header {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto var(--spacing-lg);
+    padding: 0 var(--spacing-sm);
+}
+
+.service-header h2 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.service-header h3 {
+    color: var(--text-dark);
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.service-header p {
+    font-size: 1.125rem;
+    color: var(--text-medium);
+    line-height: 1.7;
+}
+
 .service-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-xl);
-    align-items: center;
+    align-items: start;
 }
 
 .service-grid.reverse {
@@ -367,7 +395,7 @@ p {
 }
 
 .service-benefits {
-    margin: var(--spacing-lg) 0;
+    margin: 0 0 var(--spacing-md) 0;
 }
 
 .benefit-card {
@@ -432,6 +460,10 @@ p {
     background: var(--bg-white);
 }
 
+.why-choose.alternate {
+    background: var(--bg-light);
+}
+
 .why-choose h2 {
     text-align: center;
     color: var(--primary-color);
@@ -448,9 +480,10 @@ p {
 .feature-card {
     text-align: center;
     padding: var(--spacing-lg);
-    background: var(--bg-light);
+    background: var(--bg-white);
     border-radius: var(--radius-lg);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-sm);
 }
 
 .feature-card:hover {
@@ -510,14 +543,15 @@ p {
 }
 
 .cta-section .button.secondary {
-    background: transparent;
+    background: white;
     border-color: white;
-    color: white;
+    color: var(--primary-color);
 }
 
 .cta-section .button.secondary:hover {
-    background: white;
-    color: var(--primary-color);
+    background: transparent;
+    color: white;
+    border-color: white;
 }
 
 /* ===========================
@@ -894,3 +928,157 @@ p {
         padding: 0 var(--spacing-sm);
     }
 }
+
+/* Before/After Comparison Slider */
+.before-after-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+    margin-top: var(--spacing-lg);
+}
+
+.before-after-wrapper {
+    position: relative;
+}
+
+.before-after-images {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.before-image,
+.after-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* Overlay labels on images */
+.before-image::before,
+.after-image::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    padding: 0.5rem 1rem;
+    background: rgba(44, 95, 111, 0.9);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 0 6px 6px 0;
+    z-index: 5;
+}
+
+.before-label-overlay {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    padding: 0.5rem 1rem;
+    background: rgba(44, 95, 111, 0.9);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 0 6px 6px 0;
+    z-index: 5;
+    transition: opacity 0.3s ease;
+}
+
+.after-label-overlay {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    padding: 0.5rem 1rem;
+    background: rgba(122, 184, 168, 0.9);
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 6px 0 0 6px;
+    z-index: 5;
+    transition: opacity 0.3s ease;
+}
+
+.after-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    clip-path: inset(0 50% 0 0);
+}
+
+.slider-handle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: white;
+    transform: translateX(-50%);
+    cursor: ew-resize;
+    z-index: 10;
+}
+
+.slider-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: white;
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.slider-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    background: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: ew-resize;
+}
+
+.slider-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+.results-details {
+    background: var(--light-bg);
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+}
+
+.results-details h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.results-details .feature-list {
+    margin-bottom: 0;
+}
+
+@media (max-width: 968px) {
+    .before-after-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+}
+

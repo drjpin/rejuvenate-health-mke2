@@ -1040,20 +1040,36 @@ p {
 
 .pricing-disclaimer {
     text-align: center;
-    margin-top: var(--spacing-md);
-    font-size: 0.875rem;
-    color: var(--text-light);
-    font-style: italic;
+    margin-top: var(--spacing-lg);
+    font-size: 1.125rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 1.5rem;
+    background: var(--bg-accent);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--accent-color);
 }
 
 @media (max-width: 768px) {
     .pricing-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: var(--spacing-md);
     }
     
     .pricing-card .price {
         font-size: 2rem;
+    }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+    .pricing-container[style*="grid-template-columns: repeat(3"] {
+        grid-template-columns: 1fr 1fr !important;
+    }
+    
+    .pricing-container[style*="grid-template-columns: repeat(3"] .pricing-card:last-child {
+        grid-column: 1 / -1;
+        max-width: 500px;
+        margin: 0 auto;
     }
 }
 

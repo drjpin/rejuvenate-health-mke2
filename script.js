@@ -33,7 +33,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form Submission Handler
+// Form Submission Handler (Formspree)
 const consultationForm = document.getElementById('consultationForm');
 
 if (consultationForm) {
@@ -42,7 +42,6 @@ if (consultationForm) {
         
         // Get form data
         const formData = new FormData(consultationForm);
-        const data = Object.fromEntries(formData);
         
         // Show loading state
         const submitButton = consultationForm.querySelector('button[type="submit"]');
@@ -50,19 +49,27 @@ if (consultationForm) {
         submitButton.textContent = 'Sending...';
         submitButton.disabled = true;
         
-        // In production, you would send this to your backend
-        // For now, we'll simulate a successful submission
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            // Submit to Formspree
+            const response = await fetch(consultationForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
             
-            // Show success message
-            showNotification('Thank you! We\'ll contact you within 24 hours to schedule your consultation.', 'success');
-            
-            // Reset form
-            consultationForm.reset();
+            if (response.ok) {
+                // Show success message
+                showNotification('Thank you! We\'ll contact you within 24 hours to schedule your consultation.', 'success');
+                
+                // Reset form
+                consultationForm.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
         } catch (error) {
-            showNotification('Oops! Something went wrong. Please call us directly at (414) XXX-XXXX.', 'error');
+            showNotification('Oops! Something went wrong. Please call us directly at (414) 295-6045.', 'error');
         } finally {
             submitButton.textContent = originalText;
             submitButton.disabled = false;
@@ -206,3 +213,64 @@ document.querySelectorAll('a[href^="tel:"]').forEach(link => {
         // In production, you would send this to your analytics
     });
 });
+
+// Before/After Slider
+const beforeAfterSlider = document.querySelector('.slider-handle');
+if (beforeAfterSlider) {
+    const container = document.querySelector('.before-after-images');
+    const afterImage = document.querySelector('.after-image');
+    const beforeLabel = document.querySelector('.before-label-overlay');
+    const afterLabel = document.querySelector('.after-label-overlay');
+    let isDragging = false;
+
+    function updateSlider(x) {
+        const rect = container.getBoundingClientRect();
+        const offsetX = x - rect.left;
+        const percentage = Math.max(0, Math.min(100, (offsetX / rect.width) * 100));
+        
+        beforeAfterSlider.style.left = percentage + '%';
+        // After image reveals from left to right as slider moves right
+        afterImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+        
+        // Smooth gradual fade for labels
+        if (beforeLabel && afterLabel) {
+            // BEFORE label: fully visible at 0%, fades out gradually, invisible at 90%
+            const beforeOpacity = Math.max(0, Math.min(1, (90 - percentage) / 90));
+            beforeLabel.style.opacity = beforeOpacity;
+            
+            // AFTER label: invisible at 0%, fades in gradually starting at 10%, fully visible at 90%
+            const afterOpacity = Math.max(0, Math.min(1, (percentage - 10) / 80));
+            afterLabel.style.opacity = afterOpacity;
+        }
+    }
+
+    beforeAfterSlider.addEventListener('mousedown', () => {
+        isDragging = true;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            updateSlider(e.clientX);
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+    });
+
+    // Touch support for mobile
+    beforeAfterSlider.addEventListener('touchstart', () => {
+        isDragging = true;
+    });
+
+    document.addEventListener('touchmove', (e) => {
+        if (isDragging && e.touches[0]) {
+            updateSlider(e.touches[0].clientX);
+        }
+    });
+
+    document.addEventListener('touchend', () => {
+        isDragging = false;
+    });
+}
+

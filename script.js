@@ -244,8 +244,15 @@ if (beforeAfterSlider) {
         }
     }
 
+    // Make slider handle draggable
     beforeAfterSlider.addEventListener('mousedown', () => {
         isDragging = true;
+    });
+
+    // Also make the entire container clickable/draggable
+    container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        updateSlider(e.clientX);
     });
 
     document.addEventListener('mousemove', (e) => {
@@ -261,6 +268,13 @@ if (beforeAfterSlider) {
     // Touch support for mobile
     beforeAfterSlider.addEventListener('touchstart', () => {
         isDragging = true;
+    });
+
+    container.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        if (e.touches[0]) {
+            updateSlider(e.touches[0].clientX);
+        }
     });
 
     document.addEventListener('touchmove', (e) => {

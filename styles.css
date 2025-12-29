@@ -1135,8 +1135,6 @@ p {
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    cursor: ew-resize;
-    user-select: none;
 }
 
 .before-image,
@@ -1269,7 +1267,6 @@ p {
     }
 }
 
-/* ===========================
    Blog Styles
    =========================== */
 

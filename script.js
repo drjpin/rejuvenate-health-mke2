@@ -275,7 +275,7 @@ if (beforeAfterSlider) {
 }
 
 // Scroll-triggered animations for service sections
-const observerOptions = {
+const animateObserverOptions = {
     threshold: 0.2,
     rootMargin: '0px 0px -100px 0px'
 };
@@ -286,7 +286,7 @@ const animateOnScroll = new IntersectionObserver((entries) => {
             entry.target.classList.add('animate-in');
         }
     });
-}, observerOptions);
+}, animateObserverOptions);
 
 // Observe all service image wrappers and content wrappers
 document.querySelectorAll('.service-image-wrapper, .service-content-wrapper').forEach(el => {

@@ -181,7 +181,7 @@
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <p>Phone: (414) 295-6045<br>
-                    Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="61080f070e2113040b1417040f0015040904000d15090c0a044f020e0c">[email&#160;protected]</a><br>
+                    Email: info@rejuvenatehealthmke.com<br>
                     <br>
                     Located inside <a href="https://bayviewmkechiro.com" target="_blank" rel="noopener" style="color: #7AB8A8; text-decoration: underline;">Bay View Chiropractic</a><br>
                     3116 S Kinnickinnick Ave<br>
@@ -196,7 +196,7 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+    <script src="script.js"></script>
     <script>
         // Category filter functionality
         const categoryButtons = document.querySelectorAll('.category-filter');
@@ -212,4 +212,14 @@
                 
                 // Filter cards
                 blogCards.forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category').includes(category)
+                    if (category === 'all' || card.getAttribute('data-category').includes(category)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

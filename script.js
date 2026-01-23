@@ -215,67 +215,89 @@ document.querySelectorAll('a[href^="tel:"]').forEach(link => {
 });
 
 // Before/After Slider
-const beforeAfterSlider = document.querySelector('.slider-handle');
-if (beforeAfterSlider) {
-    const container = document.querySelector('.before-after-images');
-    const afterImage = document.querySelector('.after-image');
-    const beforeLabel = document.querySelector('.before-label-overlay');
-    const afterLabel = document.querySelector('.after-label-overlay');
+// Before/After Slider - supports multiple sliders on same page
+const allSliders = document.querySelectorAll('.before-after-images');
+
+allSliders.forEach(container => {
+    const slider = container.querySelector('.slider-handle');
+    const afterImage = container.querySelector('.after-image');
+    const beforeLabel = container.querySelector('.before-label-overlay');
+    const afterLabel = container.querySelector('.after-label-overlay');
     let isDragging = false;
+    let currentSlider = null;
 
     function updateSlider(x) {
         const rect = container.getBoundingClientRect();
         const offsetX = x - rect.left;
         const percentage = Math.max(0, Math.min(100, (offsetX / rect.width) * 100));
         
-        beforeAfterSlider.style.left = percentage + '%';
-        // After image reveals from left to right as slider moves right
+        slider.style.left = percentage + '%';
         afterImage.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
         
-        // Smooth gradual fade for labels
         if (beforeLabel && afterLabel) {
-            // BEFORE label: fully visible at 0%, fades out gradually, invisible at 90%
             const beforeOpacity = Math.max(0, Math.min(1, (90 - percentage) / 90));
             beforeLabel.style.opacity = beforeOpacity;
             
-            // AFTER label: invisible at 0%, fades in gradually starting at 10%, fully visible at 90%
             const afterOpacity = Math.max(0, Math.min(1, (percentage - 10) / 80));
             afterLabel.style.opacity = afterOpacity;
         }
     }
 
-    beforeAfterSlider.addEventListener('mousedown', () => {
+    slider.addEventListener('mousedown', () => {
         isDragging = true;
+        currentSlider = container;
+    });
+
+    container.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        currentSlider = container;
+        updateSlider(e.clientX);
     });
 
     document.addEventListener('mousemove', (e) => {
-        if (isDragging) {
+        if (isDragging && currentSlider === container) {
             updateSlider(e.clientX);
         }
     });
 
     document.addEventListener('mouseup', () => {
-        isDragging = false;
+        if (currentSlider === container) {
+            isDragging = false;
+            currentSlider = null;
+        }
     });
 
-    // Touch support for mobile
-    beforeAfterSlider.addEventListener('touchstart', () => {
+    // Touch support
+    slider.addEventListener('touchstart', () => {
         isDragging = true;
+        currentSlider = container;
+    });
+
+    container.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        currentSlider = container;
+        if (e.touches[0]) {
+            updateSlider(e.touches[0].clientX);
+        }
     });
 
     document.addEventListener('touchmove', (e) => {
-        if (isDragging && e.touches[0]) {
+        if (isDragging && currentSlider === container && e.touches[0]) {
             updateSlider(e.touches[0].clientX);
         }
     });
 
     document.addEventListener('touchend', () => {
-        isDragging = false;
+        if (currentSlider === container) {
+            isDragging = false;
+            currentSlider = null;
+        }
     });
-}
+});
+
 
 // Scroll-triggered animations for service sections
-const animateObserverOptions = {
+const observerOptions = {
     threshold: 0.2,
     rootMargin: '0px 0px -100px 0px'
 };
@@ -286,7 +308,7 @@ const animateOnScroll = new IntersectionObserver((entries) => {
             entry.target.classList.add('animate-in');
         }
     });
-}, animateObserverOptions);
+}, observerOptions);
 
 // Observe all service image wrappers and content wrappers
 document.querySelectorAll('.service-image-wrapper, .service-content-wrapper').forEach(el => {

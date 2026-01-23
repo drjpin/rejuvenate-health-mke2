@@ -23,7 +23,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offset = 80; // Account for fixed navbar
+            const offset = 80;
             const targetPosition = target.offsetTop - offset;
             window.scrollTo({
                 top: targetPosition,
@@ -33,24 +33,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form Submission Handler (Formspree)
+// Form Submission Handler
 const consultationForm = document.getElementById('consultationForm');
 
 if (consultationForm) {
     consultationForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Get form data
         const formData = new FormData(consultationForm);
-        
-        // Show loading state
         const submitButton = consultationForm.querySelector('button[type="submit"]');
         const originalText = submitButton.textContent;
         submitButton.textContent = 'Sending...';
         submitButton.disabled = true;
         
         try {
-            // Submit to Formspree
             const response = await fetch(consultationForm.action, {
                 method: 'POST',
                 body: formData,
@@ -60,10 +56,7 @@ if (consultationForm) {
             });
             
             if (response.ok) {
-                // Show success message
                 showNotification('Thank you! We\'ll contact you within 24 hours to schedule your consultation.', 'success');
-                
-                // Reset form
                 consultationForm.reset();
             } else {
                 throw new Error('Form submission failed');
@@ -79,18 +72,15 @@ if (consultationForm) {
 
 // Notification System
 function showNotification(message, type = 'success') {
-    // Remove any existing notifications
     const existingNotification = document.querySelector('.notification');
     if (existingNotification) {
         existingNotification.remove();
     }
     
-    // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
     notification.textContent = message;
     
-    // Add styles
     Object.assign(notification.style, {
         position: 'fixed',
         top: '20px',
@@ -106,10 +96,8 @@ function showNotification(message, type = 'success') {
         fontWeight: '500'
     });
     
-    // Add to page
     document.body.appendChild(notification);
     
-    // Remove after 5 seconds
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease';
         setTimeout(() => notification.remove(), 300);
@@ -206,28 +194,32 @@ document.querySelectorAll('section').forEach(section => {
     observer.observe(section);
 });
 
-// Phone number click tracking (for analytics)
+// Phone number click tracking
 document.querySelectorAll('a[href^="tel:"]').forEach(link => {
     link.addEventListener('click', () => {
         console.log('Phone number clicked');
-        // In production, you would send this to your analytics
     });
 });
 
-// Before/After Slider
-// Before/After Slider - supports multiple sliders on same page
-const allSliders = document.querySelectorAll('.before-after-images');
-
-allSliders.forEach(container => {
+// Before/After Slider - FIXED to support multiple sliders
+document.querySelectorAll('.before-after-images').forEach((container, index) => {
     const slider = container.querySelector('.slider-handle');
     const afterImage = container.querySelector('.after-image');
     const beforeLabel = container.querySelector('.before-label-overlay');
     const afterLabel = container.querySelector('.after-label-overlay');
+    
+    if (!slider || !afterImage) {
+        console.log('Slider ' + index + ' missing elements');
+        return;
+    }
+    
+    console.log('Initializing slider ' + index);
+    
     let isDragging = false;
-    let currentSlider = null;
 
-    function updateSlider(x) {
+    function updateSlider(e, directClick = false) {
         const rect = container.getBoundingClientRect();
+        const x = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
         const offsetX = x - rect.left;
         const percentage = Math.max(0, Math.min(100, (offsetX / rect.width) * 100));
         
@@ -243,61 +235,62 @@ allSliders.forEach(container => {
         }
     }
 
-    slider.addEventListener('mousedown', () => {
+    // Mouse events
+    slider.addEventListener('mousedown', (e) => {
+        e.preventDefault();
         isDragging = true;
-        currentSlider = container;
+        console.log('Slider ' + index + ' mousedown on handle');
     });
 
     container.addEventListener('mousedown', (e) => {
+        e.preventDefault();
         isDragging = true;
-        currentSlider = container;
-        updateSlider(e.clientX);
+        updateSlider(e, true);
+        console.log('Slider ' + index + ' mousedown on container');
     });
 
     document.addEventListener('mousemove', (e) => {
-        if (isDragging && currentSlider === container) {
-            updateSlider(e.clientX);
+        if (isDragging) {
+            e.preventDefault();
+            updateSlider(e);
         }
     });
 
     document.addEventListener('mouseup', () => {
-        if (currentSlider === container) {
+        if (isDragging) {
+            console.log('Slider ' + index + ' mouseup');
             isDragging = false;
-            currentSlider = null;
         }
     });
 
-    // Touch support
-    slider.addEventListener('touchstart', () => {
+    // Touch events
+    slider.addEventListener('touchstart', (e) => {
         isDragging = true;
-        currentSlider = container;
+        console.log('Slider ' + index + ' touchstart on handle');
     });
 
     container.addEventListener('touchstart', (e) => {
         isDragging = true;
-        currentSlider = container;
-        if (e.touches[0]) {
-            updateSlider(e.touches[0].clientX);
-        }
+        updateSlider(e, true);
+        console.log('Slider ' + index + ' touchstart on container');
     });
 
     document.addEventListener('touchmove', (e) => {
-        if (isDragging && currentSlider === container && e.touches[0]) {
-            updateSlider(e.touches[0].clientX);
+        if (isDragging) {
+            e.preventDefault();
+            updateSlider(e);
         }
-    });
+    }, { passive: false });
 
     document.addEventListener('touchend', () => {
-        if (currentSlider === container) {
+        if (isDragging) {
             isDragging = false;
-            currentSlider = null;
         }
     });
 });
 
-
 // Scroll-triggered animations for service sections
-const observerOptions = {
+const animateObserverOptions = {
     threshold: 0.2,
     rootMargin: '0px 0px -100px 0px'
 };
@@ -308,10 +301,8 @@ const animateOnScroll = new IntersectionObserver((entries) => {
             entry.target.classList.add('animate-in');
         }
     });
-}, observerOptions);
+}, animateObserverOptions);
 
-// Observe all service image wrappers and content wrappers
 document.querySelectorAll('.service-image-wrapper, .service-content-wrapper').forEach(el => {
     animateOnScroll.observe(el);
 });
-
